@@ -1,0 +1,28 @@
+services:
+  dir-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.dir-server
+    container_name: dir-server
+    networks:
+      lan-net:
+        ipv4_address: 10:10:10:20
+
+
+  fw-perimeter:
+  client-lan:
+  admin-pc:
+
+networks:
+  lan_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.10.0/24
+  
+  dmz_net:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 10.10.20.0/24
