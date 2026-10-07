@@ -1,27 +1,81 @@
 # Práctica 1 de SAD · SecureCorp — Respuestas
 
 **Nombre y apellidos:**
-**Usuario:**
+Hugo Lucena Mariscal
+
+**Usuario: hlucena**
 
 Responde con tus palabras, en 1-3 líneas. En la defensa te preguntaré lo mismo en voz alta.
 
 **Contraseñas que has usado** (solo porque es un laboratorio; en una empresa, jamás en un fichero):
 
-- Tu usuario:
-- mtorres:
-
+- Tu usuario: 
+- hlucena: Hugo2026
+- mtorres: Marta2026
 ---
 
 **1. (A1)** ¿Quién es el `issuer` de tu `ca.crt`? ¿Hasta qué fecha es válido? ¿Por qué el `subject`
 y el `issuer` de la CA son iguales y los de `ldap.crt` no?
+* El issuer es "ES", y es valido hasta dentro de 3650 dias
+* Porque la CA es la autoridad maxima y firma su propio certificado mientras que ldap.crt esta autorizado por la CA
 
 
 **2. (A3)** Pega el comando y el resultado de tus dos búsquedas:
 
 ```
 a) miembros de rrhh:
+# extended LDIF
+#
+# LDAPv3
+# base <ou=groups,dc=securecorp,dc=local> with scope subtree
+# filter: (cn=rrhh)
+# requesting: member 
+#
+
+# rrhh, groups, securecorp.local
+dn: cn=rrhh,ou=groups,dc=securecorp,dc=local
+member: uid=lromero,ou=people,dc=securecorp,dc=local
+member: uid=mtorres,ou=people,dc=securecorp,dc=local
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1
+
 
 b) cn y mail de todas las personas:
+# extended LDIF
+#
+# LDAPv3
+# base <ou=people,dc=securecorp,dc=local> with scope subtree
+# filter: (objectClass=inetOrgPerson)
+# requesting: cn mail 
+#
+
+# lromero, people, securecorp.local
+dn: uid=lromero,ou=people,dc=securecorp,dc=local
+cn: Lucia Romero
+mail: lromero@securecorp.local
+
+# hlucena, people, securecorp.local
+dn: uid=hlucena,ou=people,dc=securecorp,dc=local
+cn: Hugo
+mail: hlucena@securecorp.local
+
+# mtorres, people, securecorp.local
+dn: uid=mtorres,ou=people,dc=securecorp,dc=local
+cn: Marta
+mail: mtorres@securecorp.local
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 4
+# numEntries: 3
+
 
 ```
 
